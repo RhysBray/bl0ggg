@@ -1,14 +1,15 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
+import Header from "./components/header";
+import PostContainer from "./containers/postContainer";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Blog Coming Soon!</h1>
-      </header>
+      <Header />
+      <main>
+        <PostContainer />
+      </main>
     </div>
   );
 };

@@ -1,0 +1,20 @@
+@import "../../variables.scss";
+
+.app-header {
+  position: fixed;
+  z-index: 1;
+  background-color: $secondary;
+  width: 15vw;
+  height: 100vh;
+  @extend %flex-centered;
+  align-items: flex-start;
+  color: white;
+  border-right: $accent solid 0.5pt;
+
+  h1 {
+    width: 1em;
+    font-size: 40pt;
+    text-align: center;
+    @extend %flex-centered;
+  }
+}

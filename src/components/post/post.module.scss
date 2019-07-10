@@ -1,0 +1,29 @@
+@import "../../variables.scss";
+
+.post {
+  width: 75vw;
+  min-height: 15vh;
+  margin: $base-space * 1.5;
+  background-color: $tertiary;
+  border: solid $accent 1pt;
+  border-radius: 10px;
+  @extend %flex-centered;
+  flex-direction: column;
+
+  .title {
+    width: 100%;
+    padding: $base-space;
+    text-align: center;
+    border-bottom: solid rgb(240, 226, 208) 1pt;
+  }
+  .article {
+    width: 100%;
+    padding: 0 $base-space 0 $base-space;
+  }
+  .poster {
+    width: 100%;
+    padding: $base-space;
+    text-align: right;
+    border-top: solid rgb(240, 226, 208) 1pt;
+  }
+}

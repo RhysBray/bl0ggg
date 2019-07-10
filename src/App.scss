@@ -1,0 +1,19 @@
+@import "./variables.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #3b2a2a;
+
+  main {
+    padding-left: 15vw;
+    @extend %flex-centered;
+    flex-direction: column;
+  }
+}

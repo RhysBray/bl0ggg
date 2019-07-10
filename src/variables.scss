@@ -1,0 +1,18 @@
+// variables
+$primary: #3b2a2a;
+$secondary: #971b1b;
+$tertiary: rgb(255, 240, 221);
+
+$text-primary: black;
+$text-secondary: white;
+
+$accent: rgb(209, 180, 84);
+
+$base-space: 10px;
+
+// inheritance
+%flex-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
