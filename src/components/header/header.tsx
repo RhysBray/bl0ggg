@@ -1,20 +1,44 @@
 import * as React from "react";
 import styles from "./header.module.scss";
 
-export interface IProps {}
+import { connect } from "react-redux";
+import { IStore } from "../../reducers";
+import { toggleMakePost } from "../../reducers/generalReducer";
+
+export interface IOwnProps {}
+
+export interface IStateProps {
+  toggleMakePost: () => void;
+  isHidden: boolean;
+}
 
 export interface IState {}
 
-class Header extends React.Component<IProps, IState> {
-  // state = { :  }
+class Header extends React.Component<IOwnProps & IStateProps, IState> {
   render() {
+    let showOrNot;
+    this.props.isHidden ? (showOrNot = "") : (showOrNot = styles.show);
     return (
       <header className={styles["app-header"]}>
-        {/*for links */}
-        <h1># # #</h1>
+        <h1>BL0GGGG</h1>
+        <div
+          className={`${styles["make-post-button"]} ${showOrNot}`}
+          onClick={this.props.toggleMakePost}
+        >
+          Post!
+        </div>
       </header>
     );
   }
 }
 
-export default Header;
+const mapStateToProps = (state: IStore, props: IOwnProps) => {
+  return { isHidden: state.storeState.isHidden };
+};
+
+const mapDispatchToProps = { toggleMakePost };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

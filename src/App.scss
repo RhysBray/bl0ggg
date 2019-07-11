@@ -12,8 +12,18 @@ body {
   background-color: #3b2a2a;
 
   main {
-    padding-left: 15vw;
+    padding-top: 10vh;
     @extend %flex-centered;
     flex-direction: column;
+  }
+}
+
+/////////////////////////////////////////////////
+
+@media only screen and (min-width: 425px) {
+  body {
+    main {
+      padding-top: 15vh;
+    }
   }
 }

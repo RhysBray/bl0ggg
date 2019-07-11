@@ -25,7 +25,6 @@ class PostContainer extends React.Component<IProps, IState> {
       .get()
       .then(blogs => {
         blogs.forEach(post => {
-          console.log(post.data());
           blogPosts.push(post.data().blogPost);
           this.setState({ posts: blogPosts });
         });
