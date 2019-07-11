@@ -63,6 +63,7 @@ class MakePost extends React.Component<IOwnProps & IStateProps, IState> {
               title = event.target.value;
             }}
             className={styles.title}
+            placeholder="Whats it about?"
           />
           <label>What do you want to say? </label>
           <textarea
@@ -70,6 +71,7 @@ class MakePost extends React.Component<IOwnProps & IStateProps, IState> {
               article = event.target.value;
             }}
             className={styles.article}
+            placeholder="Write your main post here! Don't add any personal details or any account information for risk of being taken or used."
           />
           <div className={styles["post-button"]} onClick={handleClick}>
             Post Blog!
