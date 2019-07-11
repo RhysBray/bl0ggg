@@ -21,27 +21,27 @@ class MakePost extends React.Component<IOwnProps & IStateProps, IState> {
 
     let title = "";
     let article = "";
-    let user = "TESTING USER";
+    let user = "Anon";
 
     const postBlog = () => {
       if (title.length > 0 && article.length > 0) {
-      let blogPost = {
-        title: title,
-        article: article,
-        poster: user
-      };
-      firestore
-        .collection("posts")
-        .doc()
-        .set({
-          blogPost
-        })
-        .then(function() {
-          console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-          console.error("Error writing document: ", error);
-        });
+        let blogPost = {
+          title: title,
+          article: article,
+          poster: user
+        };
+        firestore
+          .collection("posts")
+          .doc()
+          .set({
+            blogPost
+          })
+          .then(function() {
+            console.log("Document successfully written!");
+          })
+          .catch(function(error) {
+            console.error("Error writing document: ", error);
+          });
       }
     };
     const handleClick = () => {
