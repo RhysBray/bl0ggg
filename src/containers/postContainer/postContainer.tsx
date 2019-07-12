@@ -17,7 +17,8 @@ export interface IPost {
 
 class PostContainer extends React.Component<IProps, IState> {
   state = { posts: [] };
-  public componentDidMount = () => {
+
+  public getPosts = () => {
     let blogPosts: IPost[];
     blogPosts = [];
     firestore
@@ -31,22 +32,14 @@ class PostContainer extends React.Component<IProps, IState> {
       });
   };
 
-  //////////////////// posting works like this //////////////////////
-  // posts.map(blogPost => {
-  //   firestore
-  //     .collection("posts")
-  //     .doc()
-  //     .set({
-  //       blogPost
-  //     })
-  //     .then(function() {
-  //       console.log("Document successfully written!");
-  //     })
-  //     .catch(function(error) {
-  //       console.error("Error writing document: ", error);
-  //     });
-  // });
-  ///////////////////////////////////////////////////////////////////
+  public componentDidMount = () => {
+    this.getPosts();
+  };
+  // public componentDidUpdate = () => {
+  //   this.getPosts();
+  //   console.log("updated");
+  //   setTimeout("5000ms");
+  // };
 
   render() {
     return this.state.posts.map((post, index) => (

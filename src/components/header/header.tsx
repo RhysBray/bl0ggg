@@ -1,5 +1,6 @@
 import * as React from "react";
 import styles from "./header.module.scss";
+import { NavLink } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { IStore } from "../../reducers";
@@ -20,6 +21,9 @@ class Header extends React.Component<IOwnProps & IStateProps, IState> {
     this.props.isHidden ? (showOrNot = "") : (showOrNot = styles.show);
     return (
       <header className={styles["app-header"]}>
+        <NavLink to="login">
+          <div className={styles.logout}>LogOut</div>
+        </NavLink>
         <h1>BL0GGGG</h1>
         <div
           className={`${styles["make-post-button"]} ${showOrNot}`}
