@@ -1,6 +1,7 @@
 import * as React from "react";
 import styles from "./header.module.scss";
 import { NavLink } from "react-router-dom";
+import { auth } from "../../firebase";
 
 import { connect } from "react-redux";
 import { IStore } from "../../reducers";
@@ -19,9 +20,14 @@ class Header extends React.Component<IOwnProps & IStateProps, IState> {
   render() {
     let showOrNot;
     this.props.isHidden ? (showOrNot = "") : (showOrNot = styles.show);
+
+    const handleClick = () => {
+      auth.signOut().then(() => alert("successful sign out"));
+    };
+
     return (
       <header className={styles["app-header"]}>
-        <NavLink to="login">
+        <NavLink to="login" onClick={handleClick}>
           <div className={styles.logout}>LogOut</div>
         </NavLink>
         <h1>BL0GGGG</h1>

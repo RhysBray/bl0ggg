@@ -8,7 +8,6 @@ export interface IProps {}
 export interface IState {}
 
 class InnerApp extends React.Component<IProps, IState> {
-  // state = { :  }
   public render() {
     return (
       <React.Fragment>

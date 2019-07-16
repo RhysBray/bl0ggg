@@ -1,19 +1,45 @@
 import * as React from "react";
 import styles from "./register.module.scss";
 import { NavLink } from "react-router-dom";
+import { auth } from "../../firebase";
 
 export interface IOwnProps {}
 
 export interface IStateProps {}
 
-export interface IState {}
+export interface IState {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 class Register extends React.Component<IOwnProps & IStateProps, IState> {
-  handleClick = () => {};
+  public state = { email: "", password: "", confirmPassword: "" };
+  private handleClick = () => {
+    if (
+      this.state.password === this.state.confirmPassword &&
+      this.state.password !== "" &&
+      this.state.email !== ""
+    ) {
+      auth
+        .createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() => {
+          alert(
+            "User with email " +
+              this.state.email +
+              " has been successfully registered."
+          );
+        })
+        .catch(error => {
+          alert(
+            "There was an error registering your account, please check if your email is already registered with us. Thank you."
+          );
+        });
+    } else {
+      alert("The passwords do not match");
+    }
+  };
   public render() {
-    let email = "";
-    let password = "";
-    let confirmPassword = "";
     return (
       <div className={styles.container}>
         <form className={styles.form}>
@@ -22,8 +48,8 @@ class Register extends React.Component<IOwnProps & IStateProps, IState> {
           <input
             type="email"
             onChange={event => {
-              email = event.target.value;
-              console.log(email);
+              this.setState({ email: event.target.value });
+              console.log(this.state.email);
             }}
             className={styles.input}
             placeholder="*"
@@ -32,8 +58,8 @@ class Register extends React.Component<IOwnProps & IStateProps, IState> {
           <input
             type="password"
             onChange={event => {
-              password = event.target.value;
-              console.log(password);
+              this.setState({ password: event.target.value });
+              console.log(this.state.password);
             }}
             className={styles.input}
             placeholder="*"
@@ -42,17 +68,19 @@ class Register extends React.Component<IOwnProps & IStateProps, IState> {
           <input
             type="password"
             onChange={event => {
-              confirmPassword = event.target.value;
-              console.log(confirmPassword);
+              this.setState({ confirmPassword: event.target.value });
+              console.log(this.state.confirmPassword);
             }}
             className={styles.input}
             placeholder="*"
           />
           <div className={styles.buttons}>
-            <NavLink className={styles.link} to="/bl0gggg">
-              <div className={styles.button} onClick={this.handleClick}>
-                Register
-              </div>
+            <NavLink
+              className={styles.link}
+              to="/login"
+              onClick={this.handleClick}
+            >
+              <div className={styles.button}>Register</div>
             </NavLink>
             <NavLink className={styles.link} to="/login">
               <div className={`${styles.button} ${styles.secondary}`}>Back</div>

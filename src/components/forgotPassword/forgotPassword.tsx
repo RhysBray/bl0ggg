@@ -1,15 +1,30 @@
 import * as React from "react";
 import styles from "./forgotPassword.module.scss";
 import { NavLink } from "react-router-dom";
+import { auth } from "../../firebase";
 
 export interface IOwnProps {}
 
 export interface IStateProps {}
 
-export interface IState {}
+export interface IState {
+  email: string;
+}
 
 class ForgotPassword extends React.Component<IOwnProps & IStateProps, IState> {
-  handleClick = () => {};
+  public state = { email: "" };
+
+  private handleClick = () => {
+    if (this.state.email !== "") {
+      auth
+        .sendPasswordResetEmail(this.state.email)
+        .then(() => alert("Password reset email has been sent"))
+        .catch(error => {
+          alert("Invalid email, please try again.");
+        });
+    }
+  };
+
   public render() {
     let email = "";
     return (
@@ -20,16 +35,18 @@ class ForgotPassword extends React.Component<IOwnProps & IStateProps, IState> {
           <input
             type="email"
             onChange={event => {
-              email = event.target.value;
+              this.setState({ email: event.target.value });
               console.log(email);
             }}
             className={styles.input}
             placeholder="*"
           />
           <div className={styles.buttons}>
-            <div className={styles.button} onClick={this.handleClick}>
-              Send Email
-            </div>
+            <NavLink className={styles.link} to="/login">
+              <div className={styles.button} onClick={this.handleClick}>
+                Send Email
+              </div>
+            </NavLink>
             <NavLink className={styles.link} to="/login">
               <div className={`${styles.button} ${styles.secondary}`}>Back</div>
             </NavLink>

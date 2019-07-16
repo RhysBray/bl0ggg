@@ -1,18 +1,44 @@
 import * as React from "react";
 import styles from "./login.module.scss";
 import { NavLink } from "react-router-dom";
+import { auth } from "../../firebase";
 
 export interface IOwnProps {}
 
 export interface IStateProps {}
 
-export interface IState {}
+export interface IState {
+  path: string;
+  email: string;
+  password: string;
+}
 
 class Login extends React.Component<IOwnProps & IStateProps, IState> {
-  handleClick = () => {};
+  public state = { path: "", email: "", password: "" };
+  private handleChange = () => {
+    auth
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(() => {
+        this.setState({ path: "/bl0gggg" });
+      })
+      .catch(error => {
+        this.setState({ path: "/" });
+      });
+    console.log(this.state.path);
+  };
+
+  private handleClick = () => {
+    auth
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(() => {
+        alert("Successful sign in");
+      })
+      .catch(error => {
+        alert("Your Email or Password are incorrect, please try again");
+      });
+    console.log(this.state.path);
+  };
   public render() {
-    let email = "";
-    let password = "";
     return (
       <div className={styles.container}>
         <form className={styles.form}>
@@ -21,8 +47,9 @@ class Login extends React.Component<IOwnProps & IStateProps, IState> {
           <input
             type="email"
             onChange={event => {
-              email = event.target.value;
-              console.log(email);
+              this.setState({ email: event.target.value }, () =>
+                this.handleChange()
+              );
             }}
             className={styles.input}
             placeholder="*"
@@ -31,19 +58,20 @@ class Login extends React.Component<IOwnProps & IStateProps, IState> {
           <input
             type="password"
             onChange={event => {
-              password = event.target.value;
-              console.log(password);
+              this.setState({ password: event.target.value }, () =>
+                this.handleChange()
+              );
             }}
             className={styles.input}
             placeholder="*"
           />
           <div className={styles.buttons}>
-            <NavLink className={styles.link} to="/bl0gggg">
+            <NavLink className={styles.link} to={this.state.path}>
               <div className={styles.button} onClick={this.handleClick}>
                 Login
               </div>
             </NavLink>
-            <NavLink className={styles.link} to="/registation">
+            <NavLink className={styles.link} to="/registration">
               <div className={`${styles.button} ${styles.secondary}`}>
                 Register
               </div>
